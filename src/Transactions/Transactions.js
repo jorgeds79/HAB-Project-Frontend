@@ -1,7 +1,7 @@
 import { Link, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import useTransactions from './useTransactions'
-import './Transactionlist.css'
+import './Transactions.css'
 
 function Transactions({ reload }) {
     const login = useSelector(s => s.login)
@@ -9,7 +9,7 @@ function Transactions({ reload }) {
     const dispatch = useDispatch()
 
     const transactions = useTransactions('http://localhost:9999/user/transactions', login.token, reload) || []
-    
+
     if (!login) {
         return <Redirect to="/" />
     }
@@ -17,7 +17,7 @@ function Transactions({ reload }) {
     if (transactions.length === 0) return (
         <div>
             <h2>Aún no has realizado transacciones</h2>
-            <Link to={"/mypanel"} >
+            <Link to={"/user/mypanel"} >
                 <span >Volver a mi perfil</span>
             </Link>
         </div>
@@ -28,15 +28,12 @@ function Transactions({ reload }) {
 
     return (
         <aside className="transaction-list">
-            <Link to={"/mypanel"} >
-                <span >Volver a mi perfil</span>
-            </Link>
             <h1 className="title" >TRANSACCIONES</h1>
             {purchases.length !== 0 &&
                 <div className="transaction-list">
                     <h2 className="title" >Compras:</h2>
                     {purchases.map(purchase =>
-                        <Link to={"/transactions/list/" + purchase.id} onClick={() => dispatch({ type: 'transaction', data: purchase })} key={purchase.id} >
+                        <Link to={"/user/mypanel/transactions/list/" + purchase.id} onClick={() => dispatch({ type: 'transaction', data: purchase })} key={purchase.id} >
                             <div className="transaction" >
                                 <span className="idtransaction">
                                     Identificador: LDE{purchase.id}{purchase.book_id}{purchase.seller_id}{purchase.buyer_id}
@@ -58,7 +55,7 @@ function Transactions({ reload }) {
                 <div className="transaction-list">
                     <h2 className="title" >Ventas:</h2>
                     {sales.map(sale =>
-                        <Link to={"/transactions/list/" + sale.id} onClick={() => dispatch({ type: 'transaction', data: sale })} key={sale.id} >
+                        <Link to={"/user/mypanel/transactions/list/" + sale.id} onClick={() => dispatch({ type: 'transaction', data: sale })} key={sale.id} >
                             <div className="transaction" >
                                 <span className="idtransaction">
                                     Identificador: LDE{sale.id}{sale.book_id}{sale.seller_id}{sale.buyer_id}

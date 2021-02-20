@@ -24,7 +24,7 @@ function Header() {
       {login &&
         <div className="logout" >
           <span>Hola {login.name}</span>
-          <Link to="/mypanel">Ir a mi cuenta</Link>
+          <Link to="/user/mypanel">Ir a mi cuenta</Link>
           <button onClick={handleLogout}>Logout</button>
         </div>
       }

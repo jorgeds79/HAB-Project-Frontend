@@ -15,7 +15,7 @@ function Messenger() {
         <div className="messenger">
             <Chats />
             <Switch>
-                <Route path="/messages-chats/chatlist/:id" exact>
+                <Route path="/user/mypanel/messages-chats/chatlist/:id" exact>
                     <Conversacion />
                 </Route>
             </Switch>

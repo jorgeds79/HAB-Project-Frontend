@@ -53,7 +53,7 @@ function Updatepassword() {
         }
     }
 
-    if (exit) return <Redirect to="/mypanel" />
+    if (exit) return <Redirect to="/user/mypanel" />
 
     return (
         <form className="page login" onSubmit={handleSubmit}>

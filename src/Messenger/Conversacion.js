@@ -61,7 +61,7 @@ function Conversacion() {
 
     return (
         <main>
-            {(messages.length !== 0) && (<div className="chat">
+            {(messages.length !== 0) && (<div className="chatmessages">
                 <div className="message-list">
                     <div className="message-list-inside">
                         <h3>{iAmSeller ? ('Mensajes sobre tu libro "' + messages[0].book_title + '-' + messages[0].course + '" :') : ('Mensajes sobre el libro "' + messages[0].book_title + '-' + messages[0].course + '" de ' + messages[0].seller_name + ' :')}</h3>

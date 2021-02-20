@@ -1,5 +1,5 @@
 import { Redirect, Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import './Transactionlist.css'
 import Transactions from "./Transactions";
 import Transaction from "./Transaction";
@@ -15,10 +15,10 @@ function Transactionlist() {
     }
 
     return (
-        <div className="transactions">
+        <div className="transactionsHome">
             <Transactions reload={key} />
             <Switch>
-                <Route path="/transactions/list/:id" exact>
+                <Route path="/user/mypanel/transactions/list/:id" exact>
                     <Transaction change={reload} />
                 </Route>
             </Switch>

@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 import { Link, Redirect } from "react-router-dom"
 import './Panel.css'
 
@@ -7,16 +7,19 @@ function Panel() {
     const route = useSelector(s => s.route)
     console.log(route)
     console.log(login)
-    const dispatch = useDispatch()
+
+    if (!login) {
+        return <Redirect to="/" />
+    }
 
     const options = [
         {
             "title": "Datos Personales",
-            "route": "/user/profile"
+            "route": `/user/mypanel/profile/${login.id}`
         },
         {
             "title": "Transacciones",
-            "route": "/transactions/list"
+            "route": "/user/mypanel/transactions/list"
         },
         {
             "title": "Mis libros ",
@@ -36,17 +39,13 @@ function Panel() {
         },
         {
             "title": "Mis mensajes",
-            "route": "/messages-chats/chatlist"
+            "route": "/user/mypanel/messages-chats/chatlist"
         },
         {
             "title": "Cambiar contraseña",
-            "route": "/user/password/update"
+            "route": "/user/mypanel/password/update"
         }
     ]
-
-    if (!login) {
-        return <Redirect to="/" />
-    }
 
     return (
         <div className="panel" >

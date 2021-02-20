@@ -1,12 +1,12 @@
 import { Link, NavLink, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import useChats from './useChats'
-
+import './Chats.css'
 
 function Chats() {
     const login = useSelector(s => s.login)
     const dispatch = useDispatch()
-    
+
     const chats = useChats('http://localhost:9999/messages-chats/chatlist', login.token) || []
     console.log(chats)
 
@@ -19,13 +19,10 @@ function Chats() {
     )
     return (
         <aside className="chat-list">
-            <Link to={"/mypanel"} >
-                <span >Volver a mi perfil</span>
-            </Link>
-            <h2>Chats:</h2>
+            <h2>CHATS:</h2>
             <div className="chats">
                 {chats.map(chat =>
-                    <Link to={"/messages-chats/chatlist/" + chat.id_chat} onClick={() => dispatch({ type: 'chat', data: chat.id_chat })} key={chat.id_chat} >
+                    <Link to={"/user/mypanel/messages-chats/chatlist/" + chat.id_chat} onClick={() => dispatch({ type: 'chat', data: chat.id_chat })} key={chat.id_chat} >
                         <div className="chat" >
                             <span className="idchat">
                                 Id Chat: {chat.id_chat}

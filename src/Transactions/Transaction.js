@@ -1,7 +1,7 @@
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { confirmTransaction, cancelTransaction } from "../Api/api";
 // import './Search.css'
-import './Transactionlist.css'
+import './Transactions.css'
 import { useDispatch, useSelector } from 'react-redux'
 import DateTimePicker from 'react-datetime-picker'
 import { useState } from 'react'
@@ -56,9 +56,25 @@ function Transaction({ change }) {
         }
     }
 
+    const handleConfirm = () => {
+        Swal.fire({
+            title: 'Confirmar cancelación',
+            text: "¿Seguro que quieres cancelar?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleCancel()
+            }
+        })
+    }
+
     const handleCancel = async () => {
         try {
-            const cancel = await cancelTransaction(transaction.id, login.token)
+            await cancelTransaction(transaction.id, login.token)
             Swal.fire({
                 title: 'Operación terminada!',
                 text: `La transacción LDE${transaction.id}${transaction.book_id}${transaction.seller_id}${transaction.buyer_id} ha sido cancelada`,
@@ -131,7 +147,7 @@ function Transaction({ change }) {
                     </div>
                 }
                 {transaction.status === 'en proceso' &&
-                    <button className="close" onClick={handleCancel} >Cancelar transacción</button>
+                    <button className="close" onClick={handleConfirm} >Cancelar transacción</button>
                 }
             </div>
             {modala &&
