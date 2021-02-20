@@ -1,0 +1,11 @@
+.chat {
+    
+    margin: 20px;
+    border: 1px solid black;
+    width: 150px;
+    
+}
+
+div span {
+    font-size: 3px;
+}

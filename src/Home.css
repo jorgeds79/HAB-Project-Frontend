@@ -1,0 +1,11 @@
+.home {
+    display: flex;
+    justify-content: center;
+}
+
+.home a {
+    padding: 50px;
+    background-color: lightskyblue;
+    margin: 10px;
+}
+

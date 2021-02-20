@@ -1,0 +1,15 @@
+.booklist {
+    display: flex;
+    justify-content: center;
+}
+
+.book {
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    cursor: pointer;
+}
+
+div span {
+    margin: 5px;
+}

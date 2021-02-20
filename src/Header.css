@@ -1,0 +1,37 @@
+header {
+    display: flex;
+    border-bottom: 1px solid #ccc;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 960px;
+    margin: 0 auto 30px;
+    padding: 10px 30px;
+}
+
+header h1 {
+    margin:15px;
+    padding: 10px;
+    font-size: 150%;
+}
+
+header a {
+    color: black;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.login {
+    display: flex;
+}
+
+.logout {
+    display: flex;
+    flex-direction: column;
+}
+
+a span {
+    display: flex;
+    flex-direction: column;
+    padding: 0 0 0 50px;
+    font-size: 12px;
+}

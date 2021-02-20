@@ -1,0 +1,24 @@
+form {
+    display: flex;
+    flex-direction: column;
+    
+    text-align: center;
+    align-items: center;
+}
+
+form button {
+    width: 200px;
+    padding: 3px;
+    margin-top: 15px;
+}
+
+form > div {
+    padding: 20px;
+    min-width: 400px;
+    background-color: blueviolet;
+    margin: 5px;
+}
+
+div label {
+    padding: 20px;
+}

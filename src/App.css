@@ -2,9 +2,18 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.App header {
+  display: flex;
+  align-items: center;
+}
+
+.App header img {
+  max-width: 96px;
+}
+
+.App header .links {
+  flex: 1 1 auto;
+  text-align: center;
 }
 
 @media (prefers-reduced-motion: no-preference) {
