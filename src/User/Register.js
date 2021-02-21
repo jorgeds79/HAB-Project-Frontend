@@ -38,31 +38,31 @@ function Register() {
     return (
         <div>
             {(status === 'waiting' || status === 'error') && (<form className="page register" onSubmit={handleSubmit}>
-                <div>
+                <div className="item" >
                     <label>Nombre:</label>
                     <input placeholder="Escribe tu nombre..." value={name} onChange={e => setName(e.target.value)} required autofocus />
                 </div>
-                <div>
+                <div className="item" >
                     <label>Apellidos:</label>
                     <input placeholder="Escribe apellidos ..." value={surnames} onChange={e => setSurnames(e.target.value)} required />
                 </div>
-                <div>
+                <div className="item" >
                     <label>Dirección:</label>
                     <input placeholder="Escribe tu dirección ..." value={address} onChange={e => setAddress(e.target.value)} required />
                 </div>
-                <div>
+                <div className="item" >
                     <label>Localidad:</label>
                     <input placeholder="Escribe tu localidad ..." value={locationBook} onChange={e => setLocationBook(e.target.value)} required />
                 </div>
-                <div>
+                <div className="item" >
                     <label>Teléfono:</label>
                     <input placeholder="Escribe tu teléfono ..." value={phone} onChange={e => setPhone(e.target.value)} required />
                 </div>
-                <div>
+                <div className="item" >
                     <label>Email:</label>
                     <input placeholder="Escribe tu email ..." value={email} onChange={e => setEmail(e.target.value)} required />
                 </div>
-                <div>
+                <div className="item" >
                     <label>Contraseña:</label>
                     <input placeholder="Escribe tu contraseña ..." type="password" value={password} onChange={e => setPassword(e.target.value)} required />
                 </div>

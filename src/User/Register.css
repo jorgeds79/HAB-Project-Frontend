@@ -12,11 +12,22 @@ form button {
     margin-top: 15px;
 }
 
-form  div {
+.item {
     display: flex;
-
-    min-width: 400px;
+    flex-direction: row;
+    align-items: center;
+    max-height: 50px;
+    min-width: 450px;
     background-color: blueviolet;
-    margin: 5px;
+    justify-content: space-between;
+}
+
+.item label {
+    max-width: 60px;
+    padding: 0;
+}
+
+.item input {
+    width: 300px;
 }
 

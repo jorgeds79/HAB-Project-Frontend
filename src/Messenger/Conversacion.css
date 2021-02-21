@@ -1,0 +1,23 @@
+.chatmessages {
+    display: flex;
+    margin-left: 100px;
+}
+
+.message {
+    display: flex;
+    flex-direction: row;
+}
+
+.footer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form button {
+    width: 100px;
+}
+
+input {
+    width: 300px;
+}

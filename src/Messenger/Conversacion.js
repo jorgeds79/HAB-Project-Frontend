@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link, Redirect, useParams } from "react-router-dom"
+import './Conversacion.css'
 
 function Conversacion() {
     const [msg, setMsg] = useState('')

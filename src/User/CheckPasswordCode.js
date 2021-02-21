@@ -65,7 +65,7 @@ function CheckPasswordCode() {
                 <form onSubmit={handleSubmit}>
                     <h2>RECUPERACIÓN DE PASSWORD</h2>
                     <label>Escribe nueva contraseña, debe contener entre 8 y 12 caracteres:</label>
-                    <div>
+                    <div className="formulario">
                         <input type="password" placeholder="Escribe nueva contraseña ..." value={password} onChange={e => setPassword(e.target.value)} required autofocus />
                         <input type="password" placeholder="Repite nueva contraseña ..." value={repeatPassword} onChange={e => setRepeatPassword(e.target.value)} required />
                     </div>

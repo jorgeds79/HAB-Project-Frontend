@@ -1,5 +1,6 @@
 .panelList {
-    position: relative;
+    justify-content: start;
     display: flex;
+    flex-direction: row;
     left: 300px;
 }

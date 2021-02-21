@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, Redirect, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { loginApi } from '../Api/api';
+import './Login.css'
 
 function Login() {
   const [email, setEmail] = useState('')
@@ -22,7 +23,11 @@ function Login() {
     }
   }
 
-  if (login) return <Redirect to={location.state.prevPath} />
+  if (login && location) {
+    return <Redirect to={location.state.prevPath} />
+  } else if (login) {
+    return <Redirect to="/" />
+  }
 
   return (
     <form className="page login" onSubmit={handleSubmit}>
@@ -39,7 +44,7 @@ function Login() {
       <p>
         <Link to="/user/password/recovery">No recuerdas tu contraseña?</Link>
       </p>
-      <div>
+      <div className="footer">
         <span>No tienes cuenta?</span>
         <Link to="/register">Crear cuenta</Link>
       </div>

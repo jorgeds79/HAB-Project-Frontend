@@ -1,3 +1,4 @@
 .transactionsHome {
     display: flex;
+    flex-direction: row;
 }

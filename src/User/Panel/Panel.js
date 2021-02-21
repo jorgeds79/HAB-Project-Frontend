@@ -23,7 +23,7 @@ function Panel() {
         },
         {
             "title": "Mis libros ",
-            "route": "/user/books"
+            "route": "/user/mypanel/mybooks"
         },
         {
             "title": "Subir libro",

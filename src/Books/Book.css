@@ -27,3 +27,7 @@
     margin: 10px;
     width: 100px;
 }
+
+select {
+    width: 300px;
+}

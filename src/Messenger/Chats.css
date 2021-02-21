@@ -1,7 +1,12 @@
-.chat {
+.chat-list {
     
-    margin: 20px;
+    margin-left: 100px;
+    
+    
+}
+
+.chat {
     border: 1px solid black;
     width: 150px;
-    
+    margin: 5px;
 }

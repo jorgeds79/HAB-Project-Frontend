@@ -6,6 +6,8 @@ import Updatepassword from "../Updatepassword";
 import Messenger from "../../Messenger/Messenger";
 import Transactionlist from "../../Transactions/Transactionlist";
 import './PanelList.css'
+import MyBooks from "../../Books/MyBooks";
+import Bookdetail from "../../Books/Bookdetail";
 
 function PanelList() {
     const login = useSelector(s => s.login)
@@ -23,6 +25,12 @@ function PanelList() {
                 </Route>
                 <Route path="/user/mypanel/transactions/list" >
                     <Transactionlist />
+                </Route>
+                <Route path="/user/mypanel/mybooks" >
+                    <MyBooks />
+                </Route>
+                <Route path="/user/mypanel/bookdetail/:id" exact >
+                    <Bookdetail />
                 </Route>
                 <Route path="/user/mypanel/messages-chats/chatlist" >
                     <Messenger />

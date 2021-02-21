@@ -1,13 +1,9 @@
 import { useState, useEffect } from 'react'
 
-function useFetch(url, key) {
+function useFetch(url, opts, key) {
   const [data, setData] = useState()
 
   useEffect(() => {
-    const opts = {}
-
-    // opts.params = { 'level': 'primaria' }
-
     fetch(url, opts)
       .then(res => res.json())
       .then(data => {

@@ -53,6 +53,9 @@ function Book() {
                 <span className="location">
                     Localidad: {bookInfo.location}
                 </span>
+                <span className="detail">
+                    Detalles: {bookInfo.detail}
+                    </span>
                 <span className="price">
                     Precio: {bookInfo.price}€
                     </span>
