@@ -37,7 +37,7 @@ function Login() {
         <div>Usuario o contraseña incorrecto</div>
       }
       <p>
-        <Link to="/recovery">No recuerdas tu contraseña?</Link>
+        <Link to="/user/password/recovery">No recuerdas tu contraseña?</Link>
       </p>
       <div>
         <span>No tienes cuenta?</span>

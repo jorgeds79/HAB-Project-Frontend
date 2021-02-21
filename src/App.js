@@ -9,13 +9,15 @@ import Book from './Books/Book';
 import Newchat from './Messenger/Newchat';
 import Newtransaction from './Transactions/Newtransaction';
 import PanelList from './User/Panel/PanelList';
+import RecoverPassword from './User/RecoverPassword';
+import CheckPasswordCode from './User/CheckPasswordCode';
 
 function App() {
 
   return (
     <div className="App">
       <Header />
-      <Switch>
+      <Switch className="switch">
         <Route path="/" exact>
           <Home />
         </Route>
@@ -39,6 +41,12 @@ function App() {
         </Route>
         <Route path="/transactions/new" exact >
           <Newtransaction />
+        </Route>
+        <Route path="/user/password/recovery" exact >
+          <RecoverPassword />
+        </Route>
+        <Route path="/user/password/reset/:code?" >
+          <CheckPasswordCode />
         </Route>
         <Route path="/">No existe...</Route>
       </Switch>

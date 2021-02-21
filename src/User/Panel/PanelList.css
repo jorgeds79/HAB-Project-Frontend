@@ -1,4 +1,5 @@
 .panelList {
+    position: relative;
     display: flex;
-    margin-left: 300px;
+    left: 300px;
 }

@@ -1,4 +1,4 @@
-form {
+.page.register {
     display: flex;
     flex-direction: column;
     
@@ -12,13 +12,11 @@ form button {
     margin-top: 15px;
 }
 
-form > div {
-    padding: 20px;
+form  div {
+    display: flex;
+
     min-width: 400px;
     background-color: blueviolet;
     margin: 5px;
 }
 
-div label {
-    padding: 20px;
-}

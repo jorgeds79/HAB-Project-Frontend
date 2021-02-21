@@ -3,7 +3,7 @@ header {
     border-bottom: 1px solid #ccc;
     align-items: center;
     justify-content: space-between;
-    max-width: 960px;
+    width: 960px;
     margin: 0 auto 30px;
     padding: 10px 30px;
 }

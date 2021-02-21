@@ -42,8 +42,9 @@
 }
 
 .infotrans {
-    
-    justify-content: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .close {
@@ -68,6 +69,11 @@
 
 .place input {
     width: 250px;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
 }
 
 

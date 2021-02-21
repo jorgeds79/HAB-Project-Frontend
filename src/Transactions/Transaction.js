@@ -1,6 +1,5 @@
 import { Link, Redirect, useLocation } from 'react-router-dom'
 import { confirmTransaction, cancelTransaction } from "../Api/api";
-// import './Search.css'
 import './Transactions.css'
 import { useDispatch, useSelector } from 'react-redux'
 import DateTimePicker from 'react-datetime-picker'
@@ -16,6 +15,22 @@ function Transaction({ change }) {
     const [dateTime, setDateTime] = useState('');
     const dispatch = useDispatch()
     const location = useLocation()
+
+    const handleConfirmYes = () => {
+        Swal.fire({
+            title: `Confirmar transacción`,
+            text: `¿¿Quieres confirmar la transacción?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                handleSubmit()
+            }
+        })
+    }
 
     const handleSubmit = async e => {
         e.preventDefault()
@@ -56,10 +71,10 @@ function Transaction({ change }) {
         }
     }
 
-    const handleConfirm = () => {
+    const handleConfirmNo = () => {
         Swal.fire({
-            title: 'Confirmar cancelación',
-            text: "¿Seguro que quieres cancelar?",
+            title: `Confirmar cancelación`,
+            text: `¿Seguro que quieres cancelar?`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -147,7 +162,7 @@ function Transaction({ change }) {
                     </div>
                 }
                 {transaction.status === 'en proceso' &&
-                    <button className="close" onClick={handleConfirm} >Cancelar transacción</button>
+                    <button className="close" onClick={handleConfirmNo} >Cancelar transacción</button>
                 }
             </div>
             {modala &&
@@ -182,12 +197,14 @@ function Transaction({ change }) {
                                     required
                                 />
                             </div>
+                            <div className="buttons" >
+                                <input className="showdatetime" placeholder="Selecciona una fecha..." value={dateTime} required />
+                                <button onClick={handleConfirmYes} className="close" >Aceptar</button>
+                                <button className="close" onClick={() => setModala(false)} >Cancelar</button>
+                            </div>
                         </div>
-                        <form onSubmit={handleSubmit} >
-                            <input className="showdatetime" placeholder="Selecciona una fecha..." value={dateTime} required />
-                            <button className="close" >Aceptar</button>
-                        </form>
-                        <button className="close" onClick={() => setModala(false)} >Cancelar</button>
+
+
                     </div>
                 </div>
             }

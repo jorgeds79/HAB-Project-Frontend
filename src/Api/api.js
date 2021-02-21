@@ -99,3 +99,29 @@ export async function updateUserPassword(password, newPassword, repeatNewPasswor
         throw new Error(res.statusText)
     }
 }
+
+export async function sendRecoveryPasswordMail(email) {
+    const res = await fetch('http://localhost:9999/user/recover-password', {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email }),
+        method: 'POST'
+    })
+    if (res.ok) {
+        return await res.text()
+    } else {
+        throw new Error(res.statusText)
+    }
+}
+
+export async function changeRecoveredPassword(newPassword, id) {
+    const res = await fetch('http://localhost:9999/update-reset-password/' + id, {
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ newPassword }),
+        method: 'PUT'
+    })
+    if (res.ok) {
+        return await res.text()
+    } else {
+        throw new Error(res.statusText)
+    }
+}
