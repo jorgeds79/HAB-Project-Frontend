@@ -16,7 +16,11 @@ function Bookdetail() {
     const [editionYear, setEditionYear] = useState('')
     const [detail, setDetail] = useState('')
     const [price, setPrice] = useState('')
+    const [oldImage0, setOldImage0] = useState('')
+    const [oldImage1, setOldImage1] = useState('')
+    const [oldImage2, setOldImage2] = useState('')
     const [status, setStatus] = useState('no')
+    const [key, setKey] = useState(0)
     const [data, setData] = useState('')
     const login = useSelector(s => s.login)
 
@@ -35,13 +39,71 @@ function Bookdetail() {
                 setEditionYear(bookInfo.editionYear)
                 setDetail(bookInfo.detail)
                 setPrice(bookInfo.price)
+                bookInfo.images[0] ? setOldImage0(bookInfo.images[0]) : setOldImage0('')
+                bookInfo.images[1] ? setOldImage1(bookInfo.images[1]) : setOldImage1('')
+                bookInfo.images[2] ? setOldImage2(bookInfo.images[2]) : setOldImage2('')
             })
-    }, [])
+    }, [key])
+
+    console.log(oldImage0)
+    console.log(oldImage1)
+    console.log(oldImage2)
+
 
     const handleSubmit = async e => {
         e.preventDefault()
+
+        const fd = new FormData()
+
+        if (e.target.image0.files && oldImage0) {
+            fd.append('images', e.target.image0.files[0])
+            fd.append('image0', 'changed')
+            fd.append('oldImage0', oldImage0)
+        } else if (e.target.image0.files && !oldImage0) {
+            fd.append('images', e.target.image0.files[0])
+            fd.append('image0', 'changed')
+            fd.append('oldImage0', '')
+        } else if (oldImage0) {
+            fd.append('image0', oldImage0)
+            fd.append('oldImage0', oldImage0)
+        }
+
+        if (e.target.image1.files && oldImage1) {
+            fd.append('images', e.target.image1.files[0])
+            fd.append('image1', 'changed')
+            fd.append('oldImage1', oldImage1)
+        } else if (e.target.image1.files && !oldImage1) {
+            fd.append('images', e.target.image1.files[0])
+            fd.append('image1', 'changed')
+            fd.append('oldImage1', '')
+        } else if (oldImage1) {
+            fd.append('image1', oldImage1)
+            fd.append('oldImage1', oldImage1)
+        }
+
+        if (e.target.image2.files && oldImage2) {
+            fd.append('images', e.target.image2.files[0])
+            fd.append('image2', 'changed')
+            fd.append('oldImage2', oldImage2)
+        } else if (e.target.image2.files && !oldImage2) {
+            fd.append('images', e.target.image2.files[0])
+            fd.append('image2', 'changed')
+            fd.append('oldImage2', '')
+        } else if (oldImage2) {
+            fd.append('image2', oldImage2)
+            fd.append('oldImage2', oldImage2)
+        }
+
+        fd.append('title', title)
+        fd.append('course', course)
+        fd.append('isbn', isbn)
+        fd.append('editorial', editorial)
+        fd.append('editionYear', editionYear)
+        fd.append('detail', detail)
+        fd.append('price', price)
+
         try {
-            const dato = await updateBookInfo(id, isbn, title, course, editorial, editionYear, price, detail, login.token)
+            const dato = await updateBookInfo(id, fd, login.token)
             console.log(dato)
             Swal.fire({
                 title: 'Datos actualizados',
@@ -60,6 +122,10 @@ function Bookdetail() {
                 confirmButtonText: 'OK'
             })
         }
+        document.getElementById("inputimage0").value = ''
+        document.getElementById("inputimage1").value = ''
+        document.getElementById("inputimage2").value = ''
+        setKey(key + 1)
     }
 
     const handleConfirm = () => {
@@ -79,7 +145,7 @@ function Bookdetail() {
     }
 
     const handleDelete = async () => {
-        
+
         try {
             const dato = await deleteBook(id, login.token)
             console.log(dato)
@@ -111,7 +177,7 @@ function Bookdetail() {
 
     if (!login) return <Redirect to="/" />
 
-    
+
 
     return (
         <div>
@@ -159,6 +225,24 @@ function Bookdetail() {
                     <label>Precio:</label>
                     <input value={price} onChange={e => setPrice(e.target.value)} required /><span>€</span>
                 </div>
+                {oldImage0 &&
+                    <div>
+                        <div className="foto" style={{ backgroundImage: `url(${oldImage0})` }} />
+                        <input id="inputimage0" name="image0" type="file" accept="image/*" />
+                    </div>
+                }
+                {oldImage1 &&
+                    <div>
+                        <div className="foto" style={{ backgroundImage: `url(${oldImage1})` }} />
+                        <input id="inputimage1" name="image1" type="file" accept="image/*" />
+                    </div>
+                }
+                {oldImage2 &&
+                    <div>
+                        <div className="foto" style={{ backgroundImage: `url(${oldImage2})` }} />
+                        <input id="inputimage2" name="image2" type="file" accept="image/*" />
+                    </div>
+                }
                 <button>Guardar datos</button>
                 {status === 'error' || status === 'succes' &&
                     <div>{data}</div>

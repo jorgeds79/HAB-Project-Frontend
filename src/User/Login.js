@@ -23,11 +23,8 @@ function Login() {
     }
   }
 
-  if (login && location) {
-    return <Redirect to={location.state.prevPath} />
-  } else if (login) {
-    return <Redirect to="/" />
-  }
+  if (login && location) return <Redirect to={location.state.prevPath} />
+  else if (login) return <Redirect to="/" />
 
   return (
     <form className="page login" onSubmit={handleSubmit}>

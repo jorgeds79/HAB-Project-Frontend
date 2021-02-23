@@ -8,6 +8,7 @@ import Transactionlist from "../../Transactions/Transactionlist";
 import './PanelList.css'
 import MyBooks from "../../Books/MyBooks";
 import Bookdetail from "../../Books/Bookdetail";
+import NewBook from "../../Books/NewBook";
 
 function PanelList() {
     const login = useSelector(s => s.login)
@@ -28,6 +29,9 @@ function PanelList() {
                 </Route>
                 <Route path="/user/mypanel/mybooks" >
                     <MyBooks />
+                </Route>
+                <Route path="/user/mypanel/upload" exact >
+                    <NewBook />
                 </Route>
                 <Route path="/user/mypanel/bookdetail/:id" exact >
                     <Bookdetail />

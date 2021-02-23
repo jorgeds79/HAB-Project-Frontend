@@ -27,7 +27,7 @@ function Panel() {
         },
         {
             "title": "Subir libro",
-            "route": "/upload"
+            "route": "/user/mypanel/upload"
         },
         {
             "title": "Valoraciones",

@@ -126,14 +126,14 @@ export async function changeRecoveredPassword(newPassword, id) {
     }
 }
 
-export async function updateBookInfo(id, isbn, title, course, editorial, editionYear, price, detail, token) {
+export async function updateBookInfo(id, fd, token) {
     const res = await fetch('http://localhost:9999/update-book/' + id, {
-        headers: { 'Content-Type': 'application/json', 'Authorization': token },
-        body: JSON.stringify({ isbn, title, course, editorial, editionYear, price, detail }),
+        headers: { 'Authorization': token },
+        body: fd,
         method: 'PUT'
     })
     if (res.ok) {
-        return await res.text()
+        return await res.text('Libro actualizado correctamente')
     } else {
         throw new Error(res.statusText)
     }
@@ -150,3 +150,17 @@ export async function deleteBook(id, token) {
         throw new Error(res.statusText)
     }
 }
+
+export async function uploadBook(token, fd) {
+    const res = await fetch('http://localhost:9999/upload/book', {
+        headers: { 'Authorization': token },
+        body: fd,
+        method: 'POST'
+    })
+    if (res.ok) {
+        return await res.text('Libro subido correctamente')
+    } else {
+        throw new Error(res.statusText)
+    }
+}
+
