@@ -4,7 +4,7 @@ import './Book.css'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 import Swal from 'sweetalert2'
-import { deleteBook, updateBookInfo } from '../Api/api'
+import { deleteBook, goToDeleteImage, updateBookInfo } from '../Api/api'
 
 function Bookdetail() {
     const { id } = useParams()
@@ -21,6 +21,9 @@ function Bookdetail() {
     const [oldImage2, setOldImage2] = useState('')
     const [status, setStatus] = useState('no')
     const [key, setKey] = useState(0)
+    const [deletePhoto0, setDeletePhoto0] = useState(false)
+    const [deletePhoto1, setDeletePhoto1] = useState(false)
+    const [deletePhoto2, setDeletePhoto2] = useState(false)
     const [data, setData] = useState('')
     const login = useSelector(s => s.login)
 
@@ -45,21 +48,49 @@ function Bookdetail() {
             })
     }, [key])
 
-    console.log(oldImage0)
-    console.log(oldImage1)
-    console.log(oldImage2)
-
-
     const handleSubmit = async e => {
         e.preventDefault()
+        if (!deletePhoto0 && !deletePhoto1 && !deletePhoto2) await saveData(e)
+        else await deletePhoto()
+    }
+
+    const deletePhoto = async () => {
+        let image
+        if (deletePhoto0) image = oldImage0
+        else if (deletePhoto1) image = oldImage1
+        else if (deletePhoto2) image = oldImage2
+        setDeletePhoto0(false)
+        setDeletePhoto1(false)
+        setDeletePhoto2(false)
+        Swal.fire({
+            title: 'Borrar foto',
+            text: `¿Eliminar foto?`,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                goToDelete(image)
+            }
+        })
+    }
+
+    const goToDelete = async (image) => {
+        await goToDeleteImage(bookInfo.id, login.token, image)
+        setKey(key + 1)
+    }
+
+    const saveData = async e => {
 
         const fd = new FormData()
 
-        if (e.target.image0.files && oldImage0) {
+        if (e.target.image0.files.length !== 0 && oldImage0) {
             fd.append('images', e.target.image0.files[0])
             fd.append('image0', 'changed')
             fd.append('oldImage0', oldImage0)
-        } else if (e.target.image0.files && !oldImage0) {
+        } else if (e.target.image0.files.length !== 0 && !oldImage0) {
             fd.append('images', e.target.image0.files[0])
             fd.append('image0', 'changed')
             fd.append('oldImage0', '')
@@ -68,11 +99,11 @@ function Bookdetail() {
             fd.append('oldImage0', oldImage0)
         }
 
-        if (e.target.image1.files && oldImage1) {
+        if (e.target.image1.files.length !== 0 && oldImage1) {
             fd.append('images', e.target.image1.files[0])
             fd.append('image1', 'changed')
             fd.append('oldImage1', oldImage1)
-        } else if (e.target.image1.files && !oldImage1) {
+        } else if (e.target.image1.files.length !== 0 && !oldImage1) {
             fd.append('images', e.target.image1.files[0])
             fd.append('image1', 'changed')
             fd.append('oldImage1', '')
@@ -81,11 +112,11 @@ function Bookdetail() {
             fd.append('oldImage1', oldImage1)
         }
 
-        if (e.target.image2.files && oldImage2) {
+        if (e.target.image2.files.length !== 0 && oldImage2) {
             fd.append('images', e.target.image2.files[0])
             fd.append('image2', 'changed')
             fd.append('oldImage2', oldImage2)
-        } else if (e.target.image2.files && !oldImage2) {
+        } else if (e.target.image2.files.length !== 0 && !oldImage2) {
             fd.append('images', e.target.image2.files[0])
             fd.append('image2', 'changed')
             fd.append('oldImage2', '')
@@ -156,6 +187,7 @@ function Bookdetail() {
                 confirmButtonText: 'OK'
             })
             bookInfo.available = false
+            console.log(bookInfo)
             setStatus('success')
             setData(dato)
         } catch (e) {
@@ -227,21 +259,43 @@ function Bookdetail() {
                 </div>
                 {oldImage0 &&
                     <div>
-                        <div className="foto" style={{ backgroundImage: `url(${oldImage0})` }} />
-                        <input id="inputimage0" name="image0" type="file" accept="image/*" />
+                        <div>
+                            <div className="foto" style={{ backgroundImage: `url(${oldImage0})` }} />
+                            <span>Cambiar foto: <input id="inputimage0" name="image0" type="file" accept="image/*" /></span>
+
+                        </div>
+                        <button onClick={() => setDeletePhoto0(true)} >Borrar foto</button>
+
                     </div>
+                }
+                {!oldImage0 &&
+                    <span>Subir foto: <input id="inputimage0" name="image0" type="file" accept="image/*" /></span>
                 }
                 {oldImage1 &&
                     <div>
-                        <div className="foto" style={{ backgroundImage: `url(${oldImage1})` }} />
-                        <input id="inputimage1" name="image1" type="file" accept="image/*" />
+                        <div>
+                            <div className="foto" style={{ backgroundImage: `url(${oldImage1})` }} />
+                            <span>Cambiar foto: <input id="inputimage1" name="image1" type="file" accept="image/*" /></span>
+
+                        </div>
+                        <button onClick={() => setDeletePhoto1(true)} >Borrar foto</button>
                     </div>
+                }
+                {!oldImage1 &&
+                    <span>Subir foto: <input id="inputimage1" name="image1" type="file" accept="image/*" /></span>
                 }
                 {oldImage2 &&
                     <div>
-                        <div className="foto" style={{ backgroundImage: `url(${oldImage2})` }} />
-                        <input id="inputimage2" name="image2" type="file" accept="image/*" />
+                        <div>
+                            <div className="foto" style={{ backgroundImage: `url(${oldImage2})` }} />
+                            <span>Cambiar foto: <input id="inputimage2" name="image2" type="file" accept="image/*" /></span>
+
+                        </div>
+                        <button onClick={() => setDeletePhoto2(true)} >Borrar foto</button>
                     </div>
+                }
+                {!oldImage2 &&
+                    <span>Subir foto: <input id="inputimage2" name="image2" type="file" accept="image/*" /></span>
                 }
                 <button>Guardar datos</button>
                 {status === 'error' || status === 'succes' &&

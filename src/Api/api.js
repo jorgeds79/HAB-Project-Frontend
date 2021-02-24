@@ -164,3 +164,17 @@ export async function uploadBook(token, fd) {
     }
 }
 
+export async function goToDeleteImage(id, token, image) {
+    const res = await fetch('http://localhost:9999/update-book/images/delete/' + id, {
+        headers: { 'Content-Type': 'application/json', 'Authorization': token },
+        body: JSON.stringify({ image }),
+        method: 'DELETE'
+    })
+    if (res.ok) {
+        return await res.text('Libro subido correctamente')
+    } else {
+        throw new Error(res.statusText)
+    }
+}
+
+
