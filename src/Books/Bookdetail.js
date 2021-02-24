@@ -86,43 +86,55 @@ function Bookdetail() {
 
         const fd = new FormData()
 
-        if (e.target.image0.files.length !== 0 && oldImage0) {
-            fd.append('images', e.target.image0.files[0])
-            fd.append('image0', 'changed')
-            fd.append('oldImage0', oldImage0)
-        } else if (e.target.image0.files.length !== 0 && !oldImage0) {
+        if (oldImage0) {
+            if (e.target.image0.files.length !== 0) {
+                fd.append('images', e.target.image0.files[0])
+                fd.append('image0', 'changed')
+                fd.append('oldImage0', oldImage0)
+                document.getElementById("inputimage0").value = ''
+            } else {
+                fd.append('image0', oldImage0)
+                fd.append('oldImage0', oldImage0)
+            }
+        } else if (e.target.image0 && e.target.image0.files.length !== 0) {
             fd.append('images', e.target.image0.files[0])
             fd.append('image0', 'changed')
             fd.append('oldImage0', '')
-        } else if (oldImage0) {
-            fd.append('image0', oldImage0)
-            fd.append('oldImage0', oldImage0)
+            document.getElementById("inputimage0").value = ''
         }
 
-        if (e.target.image1.files.length !== 0 && oldImage1) {
-            fd.append('images', e.target.image1.files[0])
-            fd.append('image1', 'changed')
-            fd.append('oldImage1', oldImage1)
-        } else if (e.target.image1.files.length !== 0 && !oldImage1) {
+        if (oldImage1) {
+            if (e.target.image1.files.length !== 0) {
+                fd.append('images', e.target.image1.files[0])
+                fd.append('image1', 'changed')
+                fd.append('oldImage1', oldImage1)
+                document.getElementById("inputimage1").value = ''
+            } else {
+                fd.append('image1', oldImage1)
+                fd.append('oldImage1', oldImage1)
+            }
+        } else if (e.target.image1 && e.target.image1.files.length !== 0) {
             fd.append('images', e.target.image1.files[0])
             fd.append('image1', 'changed')
             fd.append('oldImage1', '')
-        } else if (oldImage1) {
-            fd.append('image1', oldImage1)
-            fd.append('oldImage1', oldImage1)
+            document.getElementById("inputimage1").value = ''
         }
 
-        if (e.target.image2.files.length !== 0 && oldImage2) {
-            fd.append('images', e.target.image2.files[0])
-            fd.append('image2', 'changed')
-            fd.append('oldImage2', oldImage2)
-        } else if (e.target.image2.files.length !== 0 && !oldImage2) {
+        if (oldImage2) {
+            if (e.target.image2.files.length !== 0) {
+                fd.append('images', e.target.image2.files[0])
+                fd.append('image2', 'changed')
+                fd.append('oldImage2', oldImage2)
+                document.getElementById("inputimage2").value = ''
+            } else {
+                fd.append('image2', oldImage2)
+                fd.append('oldImage2', oldImage2)
+            }
+        } else if (e.target.image2 && e.target.image2.files.length !== 0) {
             fd.append('images', e.target.image2.files[0])
             fd.append('image2', 'changed')
             fd.append('oldImage2', '')
-        } else if (oldImage2) {
-            fd.append('image2', oldImage2)
-            fd.append('oldImage2', oldImage2)
+            document.getElementById("inputimage2").value = ''
         }
 
         fd.append('title', title)
@@ -153,9 +165,6 @@ function Bookdetail() {
                 confirmButtonText: 'OK'
             })
         }
-        document.getElementById("inputimage0").value = ''
-        document.getElementById("inputimage1").value = ''
-        document.getElementById("inputimage2").value = ''
         setKey(key + 1)
     }
 
@@ -229,6 +238,8 @@ function Bookdetail() {
                         <option value="2º Primaria">2º Primaria</option>
                         <option value="3º Primaria">3º Primaria</option>
                         <option value="4º Primaria">4º Primaria</option>
+                        <option value="5º Primaria">4º Primaria</option>
+                        <option value="6º Primaria">4º Primaria</option>
                         <option value="1º E.S.O.">1º E.S.O.</option>
                         <option value="2º E.S.O.">2º E.S.O.</option>
                         <option value="3º E.S.O.">3º E.S.O.</option>
@@ -281,7 +292,7 @@ function Bookdetail() {
                         <button onClick={() => setDeletePhoto1(true)} >Borrar foto</button>
                     </div>
                 }
-                {!oldImage1 &&
+                {!oldImage1 && oldImage0 &&
                     <span>Subir foto: <input id="inputimage1" name="image1" type="file" accept="image/*" /></span>
                 }
                 {oldImage2 &&
@@ -294,7 +305,7 @@ function Bookdetail() {
                         <button onClick={() => setDeletePhoto2(true)} >Borrar foto</button>
                     </div>
                 }
-                {!oldImage2 &&
+                {!oldImage2 && oldImage1 &&
                     <span>Subir foto: <input id="inputimage2" name="image2" type="file" accept="image/*" /></span>
                 }
                 <button>Guardar datos</button>
