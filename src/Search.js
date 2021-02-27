@@ -8,7 +8,7 @@ function Search() {
     const dispatch = useDispatch()
 
     const books = useFetch('http://localhost:9999/search/' + level) || []
-    
+
     if (books.length === 0) return (
         <div>No se han encontrado resultados</div>
     )
@@ -18,6 +18,7 @@ function Search() {
             {books.map(book =>
                 <Link to={"/book/detail/" + book.id} key={book.id} >
                     <div className="book" >
+                        <span className="location">{book.location}</span>
                         <span className="title">
                             Título: {book.title}
                         </span>
