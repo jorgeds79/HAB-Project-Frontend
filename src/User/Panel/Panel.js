@@ -4,10 +4,7 @@ import './Panel.css'
 
 function Panel() {
     const login = useSelector(s => s.login)
-    const route = useSelector(s => s.route)
-    console.log(route)
-    console.log(login)
-
+        
     if (!login) {
         return <Redirect to="/" />
     }

@@ -80,6 +80,8 @@ function NewBook() {
                     <option value="2º Primaria">2º Primaria</option>
                     <option value="3º Primaria">3º Primaria</option>
                     <option value="4º Primaria">4º Primaria</option>
+                    <option value="5º Primaria">5º Primaria</option>
+                    <option value="6º Primaria">6º Primaria</option>
                     <option value="1º E.S.O.">1º E.S.O.</option>
                     <option value="2º E.S.O.">2º E.S.O.</option>
                     <option value="3º E.S.O.">3º E.S.O.</option>

@@ -30,8 +30,11 @@ function MyBooks() {
                         </span>
                         <span className="price">
                             Precio: {book.price}€
-                    </span>
+                        </span>
                     </div>
+                    {book.image &&
+                        <div className="foto" style={{ backgroundImage: `url(${book.image})` }} />
+                    }
                 </Link>
             )}
         </div>

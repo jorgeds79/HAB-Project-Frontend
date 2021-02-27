@@ -13,3 +13,9 @@
 div span {
     margin: 5px;
 }
+
+.undefined.react-stars {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}

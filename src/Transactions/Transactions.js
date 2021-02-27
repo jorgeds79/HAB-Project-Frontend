@@ -2,6 +2,7 @@ import { Link, Redirect } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import useTransactions from './useTransactions'
 import './Transactions.css'
+import { useState } from 'react'
 
 function Transactions({ reload }) {
     const login = useSelector(s => s.login)

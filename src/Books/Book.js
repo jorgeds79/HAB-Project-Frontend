@@ -3,11 +3,14 @@ import './Search.css'
 import './Book.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import Login from '../User/Login'
+import ReactStars from "react-rating-stars-component";
 
 function Book() {
     const { id } = useParams()
     const [bookInfo, setBookInfo] = useState({})
+    const [images, setImages] = useState([])
+    const [idSeller, setIdSeller] = useState()
+    const [stars, setStars] = useState(0)
     const [modal, setModal] = useState('no')
     const login = useSelector(s => s.login)
     const dispatch = useDispatch()
@@ -21,6 +24,9 @@ function Book() {
             .then(res => res.json())
             .then(bookInfo => {
                 setBookInfo(bookInfo)
+                setImages(bookInfo.images)
+                setIdSeller(bookInfo.id_seller)
+                setStars(bookInfo.stars_rating)
             })
     }, [])
 
@@ -31,9 +37,27 @@ function Book() {
     if (!bookInfo) {
         return 'Loading...'
     }
-
+    
     return (
         <div className="bookdetail">
+            <div className="rating" >
+                <span >{bookInfo.seller_name}:</span>
+                <span >Valoraciones: {bookInfo.ratings}</span>
+                <div className="seller-rating" >
+                    <ReactStars
+                        count={5}
+                        edit={false}
+                        onChange={setStars}
+                        value={stars}
+                        size={20}
+                        isHalf={true}
+                        emptyIcon={<i className="far fa-star"></i>}
+                        halfIcon={<i className="fa fa-star-half-alt"></i>}
+                        fullIcon={<i className="fa fa-star"></i>}
+                        activeColor="#ffd700"
+                    />
+                </div>
+            </div>
             <div className="book" >
                 <span className="title">
                     Título: {bookInfo.title}
@@ -55,12 +79,21 @@ function Book() {
                 </span>
                 <span className="detail">
                     Detalles: {bookInfo.detail}
-                    </span>
+                </span>
                 <span className="price">
                     Precio: {bookInfo.price}€
-                    </span>
+                </span>
             </div>
-            {login &&
+            {(images.length > 0) &&
+                <div className="foto" style={{ backgroundImage: `url(${images[0]})` }} />
+            }
+            {(images.length > 1) &&
+                <div className="foto" style={{ backgroundImage: `url(${images[1]})` }} />
+            }
+            {(images.length > 2) &&
+                <div className="foto" style={{ backgroundImage: `url(${images[2]})` }} />
+            }
+            {login && idSeller !== login.id &&
                 <div>
                     <Link to={{ pathname: '/messages-chats/new', state: { prevPath: location.pathname } }} onClick={handleClick} >
                         <span>¿Te interesa?</span>

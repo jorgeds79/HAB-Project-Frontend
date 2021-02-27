@@ -1,7 +1,7 @@
 import { Link, useParams } from 'react-router-dom'
 import useFetch from './useFetch'
 import './Search.css'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 
 function Search() {
     const { level } = useParams()
@@ -16,8 +16,8 @@ function Search() {
     return (
         <div className="booklist">
             {books.map(book =>
-                <Link to={"/book/detail/" + book.id} >
-                    <div className="book" key={book.id} >
+                <Link to={"/book/detail/" + book.id} key={book.id} >
+                    <div className="book" >
                         <span className="title">
                             Título: {book.title}
                         </span>
@@ -31,6 +31,9 @@ function Search() {
                             Precio: {book.price}€
                     </span>
                     </div>
+                    {book.image &&
+                        <div className="foto" style={{ backgroundImage: `url(${book.image})` }} />
+                    }
                 </Link>
             )}
         </div>

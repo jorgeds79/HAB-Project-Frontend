@@ -177,4 +177,17 @@ export async function goToDeleteImage(id, token, image) {
     }
 }
 
+export async function putReviewToSeller(id, token, review) {
+    const res = await fetch('http://localhost:9999/transaction-review/' + id, {
+        headers: { 'Content-Type': 'application/json', 'Authorization': token },
+        body: JSON.stringify({ review }),
+        method: 'PUT'
+    })
+    if (res.ok) {
+        return await res.text()
+    } else {
+        throw new Error(res.statusText)
+    }
+}
+
 
