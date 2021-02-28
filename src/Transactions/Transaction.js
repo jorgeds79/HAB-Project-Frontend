@@ -1,10 +1,9 @@
-import { Link, Redirect, useLocation } from 'react-router-dom'
+import { Redirect, useLocation } from 'react-router-dom'
 import { cancelTransaction, confirmTransaction, putReviewToSeller } from "../Api/api";
 import './Transaction.css'
 import { useDispatch, useSelector } from 'react-redux'
 import TextField from '@material-ui/core/TextField';
-import DateTimePicker from 'react-datetime-picker'
-import ReactStars from "react-rating-stars-component";
+import Rating from '@material-ui/lab/Rating'
 import { useState } from 'react'
 import Swal from 'sweetalert2'
 const moment = require('moment')
@@ -171,7 +170,6 @@ function Transaction({ change }) {
         return <Redirect to="/" />
     }
 
-
     return (
         <div>
             <div className="transactiondetail" >
@@ -220,40 +218,51 @@ function Transaction({ change }) {
                     <div className="rating" >
                         <span >Valora la transacción:</span>
                         <div className="estrellas" >
-                            <ReactStars
-                                count={5}
-                                onChange={setRating}
+                            <Rating
+                                name="hover-feedback"
                                 value={rating}
-                                size={35}
-                                isHalf={true}
-                                emptyIcon={<i className="far fa-star"></i>}
-                                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                                fullIcon={<i className="fa fa-star"></i>}
-                                activeColor="#ffd700"
+                                precision={0.5}
+                                readOnly={false}
+                                onChange={(event, rating) => {
+                                    setRating(rating)
+                                }}
                             />
                         </div>
                         <span>{rating}</span>
                         <button className="sendrating" onClick={handleRating} >Enviar valoración</button>
                     </div>
                 }
+                {transaction.status === 'completado' && transaction.seller_id !== login.id && transaction.review !== null &&
+                    <div className="rating" >
+                        <span >Ya has enviado tu valoración a {transaction.seller_name}:</span>
+                        <div className="estrellas" >
+                            <Rating
+                                name="hover-feedback"
+                                value={parseFloat(transaction.review)}
+                                precision={0.5}
+                                readOnly={true}
+                            />
+                        </div>
+                        <span>{transaction.review}</span>
+                    </div>
+                }
                 {transaction.status === 'completado' && transaction.seller_id === login.id && transaction.review !== null &&
                     <div className="rating" >
                         <span >Valoración enviada por {transaction.buyer_name}:</span>
                         <div className="estrellas" >
-                            <ReactStars
-                                count={5}
-                                // onChange={setRating}
+                            <Rating
+                                name="hover-feedback"
                                 value={parseFloat(transaction.review)}
-                                edit={false}
-                                size={35}
-                                isHalf={true}
-                                emptyIcon={<i className="far fa-star"></i>}
-                                halfIcon={<i className="fa fa-star-half-alt"></i>}
-                                fullIcon={<i className="fa fa-star"></i>}
-                                activeColor="#ffd700"
+                                precision={0.5}
+                                readOnly={true}
                             />
                         </div>
                         <span>{transaction.review}</span>
+                    </div>
+                }
+                {transaction.status === 'completado' && transaction.seller_id === login.id && transaction.review === null &&
+                    <div className="rating" >
+                        <span >{transaction.buyer_name} aún no ha enviado una valoración sobre la transacción.</span>
                     </div>
                 }
             </div>

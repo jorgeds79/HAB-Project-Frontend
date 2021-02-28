@@ -1,9 +1,6 @@
 
 
 
-
-
-
 .transaction {
     padding: 10px;
 }
@@ -46,8 +43,8 @@
 }
 
 .estrellas {
-    display: flex;
-    flex-direction: row;
+   
+    margin: 0;
 }
 
 .showdatetime {
@@ -68,4 +65,8 @@
 .buttons {
     display: flex;
     flex-direction: column;
+}
+
+.MuiRating-decimal {
+    margin: 0;
 }

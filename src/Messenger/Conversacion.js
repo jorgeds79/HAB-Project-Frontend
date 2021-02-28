@@ -71,6 +71,10 @@ function Conversacion() {
                                 <span className="sender">[{login.id === msg.id_destination ? interlocutor : 'Tú'}]:</span>
                                 <span className="content"> {msg.content}</span>
                                 <span className="date"> {msg.date}</span>
+                                {login.id !== msg.id_destination &&
+                                <span className="viewed">"{msg.viewed === 1 ? 'leído' : 'no leído'}"</span>
+                                }
+                                {console.log(msg.viewed)}
                                 <button onClick={() => handleRemove(msg.id)}>🗑</button>
                             </div>
                         )}

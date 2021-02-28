@@ -6,9 +6,9 @@ import './Chats.css'
 function Chats() {
     const login = useSelector(s => s.login)
     const dispatch = useDispatch()
+    const key = useSelector(s => s.chat)
 
-    const chats = useChats('http://localhost:9999/messages-chats/chatlist', login.token) || []
-    console.log(chats)
+    const chats = useChats('http://localhost:9999/messages-chats/chatlist', login.token, key) || []
 
     if (!login) {
         return <Redirect to="/" />

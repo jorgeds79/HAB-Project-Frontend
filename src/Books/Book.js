@@ -3,14 +3,13 @@ import './Search.css'
 import './Book.css'
 import { useDispatch, useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import ReactStars from "react-rating-stars-component";
+import Rating from '@material-ui/lab/Rating'
 
 function Book() {
     const { id } = useParams()
     const [bookInfo, setBookInfo] = useState({})
     const [images, setImages] = useState([])
     const [idSeller, setIdSeller] = useState()
-    const [stars, setStars] = useState(0)
     const [modal, setModal] = useState('no')
     const login = useSelector(s => s.login)
     const dispatch = useDispatch()
@@ -26,7 +25,6 @@ function Book() {
                 setBookInfo(bookInfo)
                 setImages(bookInfo.images)
                 setIdSeller(bookInfo.id_seller)
-                setStars(bookInfo.stars_rating)
             })
     }, [])
 
@@ -37,26 +35,18 @@ function Book() {
     if (!bookInfo) {
         return 'Loading...'
     }
-    
+
     return (
         <div className="bookdetail">
             <div className="rating" >
-                <span >{bookInfo.seller_name}:</span>
+                <span className="location">{bookInfo.seller_name}, {bookInfo.location}</span>
                 <span >Valoraciones: {bookInfo.ratings}</span>
-                <div className="seller-rating" >
-                    <ReactStars
-                        count={5}
-                        edit={false}
-                        onChange={setStars}
-                        value={stars}
-                        size={20}
-                        isHalf={true}
-                        emptyIcon={<i className="far fa-star"></i>}
-                        halfIcon={<i className="fa fa-star-half-alt"></i>}
-                        fullIcon={<i className="fa fa-star"></i>}
-                        activeColor="#ffd700"
-                    />
-                </div>
+                <Rating
+                    name="hover-feedback"
+                    value={parseFloat(bookInfo.ratings)}
+                    precision={0.5}
+                    readOnly={true}
+                />
             </div>
             <div className="book" >
                 <span className="title">
