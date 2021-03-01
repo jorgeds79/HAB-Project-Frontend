@@ -3,12 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import useChats from './useChats'
 import './Chats.css'
 
-function Chats() {
+function Chats({ reload }) {
     const login = useSelector(s => s.login)
     const dispatch = useDispatch()
-    const key = useSelector(s => s.chat)
-
-    const chats = useChats('http://localhost:9999/messages-chats/chatlist', login.token, key) || []
+    
+    const chats = useChats('http://localhost:9999/messages-chats/chatlist', login.token, reload) || []
 
     if (!login) {
         return <Redirect to="/" />

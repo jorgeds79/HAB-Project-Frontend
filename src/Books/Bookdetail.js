@@ -215,10 +215,12 @@ function Bookdetail() {
     } else if (bookInfo.available === false) {
         return <Redirect to="/user/mypanel/mybooks" />
     }
+    console.log(bookInfo.images)
+    console.log(oldImage0)
+    console.log(oldImage1)
+    console.log(oldImage2)
 
     if (!login) return <Redirect to="/" />
-
-
 
     return (
         <div>

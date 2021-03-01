@@ -3,14 +3,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { Link, Redirect, useParams } from "react-router-dom"
 import './Conversacion.css'
 
-function Conversacion() {
+function Conversacion({ change }) {
     const [msg, setMsg] = useState('')
     const [key, setKey] = useState(0)
     const [messages, setMessages] = useState([])
     const login = useSelector(s => s.login)
     const chat = useSelector(s => s.chat)
-    console.log(chat)
-    const dispatch = useDispatch()
 
     useEffect(() => {
         fetch('http://localhost:9999/messages-chats/chatmessages/' + chat, {
@@ -21,6 +19,7 @@ function Conversacion() {
             .then(messages => {
                 setMessages(messages)
             })
+        change()
     }, [chat, key])
 
     let iAmSeller = false
@@ -72,7 +71,7 @@ function Conversacion() {
                                 <span className="content"> {msg.content}</span>
                                 <span className="date"> {msg.date}</span>
                                 {login.id !== msg.id_destination &&
-                                <span className="viewed">"{msg.viewed === 1 ? 'leído' : 'no leído'}"</span>
+                                    <span className="viewed">"{msg.viewed === 1 ? 'leído' : 'no leído'}"</span>
                                 }
                                 {console.log(msg.viewed)}
                                 <button onClick={() => handleRemove(msg.id)}>🗑</button>

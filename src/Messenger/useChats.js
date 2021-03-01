@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-function useChats(url, token, key) {
+function useChats(url, token, reload) {
   const [chats, setChats] = useState()
 
   useEffect(() => {
@@ -13,7 +13,7 @@ function useChats(url, token, key) {
       .then(chats => {
         setChats(chats)
       })
-  }, [key])
+  }, [reload])
 
   return chats
 }
